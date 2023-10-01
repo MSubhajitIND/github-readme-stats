@@ -6,16 +6,31 @@ on:
       - opened
       - edited
 
+permissions:
+  actions: read
+  checks: read
+  contents: read
+  deployments: read
+  issues: write
+  discussions: read
+  packages: read
+  pages: read
+  pull-requests: read
+  repository-projects: read
+  security-events: read
+  statuses: read
+
 jobs:
   closeEmptyIssuesAndTemplates:
     if: github.repository == 'anuraghazra/github-readme-stats'
     name: Close empty issues
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3 # NOTE: Retrieve issue templates.
+      # NOTE: Retrieve issue templates.
+      - uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 # v4.1.0
 
       - name: Run empty issues closer action
-        uses: rickstaa/empty-issues-closer-action@v1
+        uses: rickstaa/empty-issues-closer-action@c73b7528ed1cc311e72b65fe6f270d96548355ff # v1.1.25
         env:
           github_token: ${{ secrets.GITHUB_TOKEN }}
         with:
